@@ -1,66 +1,51 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Footer } from "@/components/Footer";
+import { AIAngle } from "@/components/sections/AIAngle";
+import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Hero } from "@/components/sections/Hero";
+import { Pricing } from "@/components/sections/Pricing";
+import { Services } from "@/components/sections/Services";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { getHomePageData } from "@/lib/get-home-page";
+import type { Metadata } from "next";
 
-export default function Home() {
+export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { seo } = await getHomePageData();
+  const title = seo.title?.trim() || "Ciao Ciao, European product studio";
+  const description =
+    seo.description?.trim() ||
+    "European product studio building websites, digital products, and design systems.";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: seo.ogImageUrl ? [{ url: seo.ogImageUrl }] : [],
+    },
+  };
+}
+
+export default async function Home() {
+  const data = await getHomePageData();
+  const secondaryCtaUrl =
+    process.env.NEXT_PUBLIC_PORTFOLIO_URL?.trim() ||
+    data.hero.secondaryCtaUrl;
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <main>
+        <Hero data={data.hero} secondaryCtaUrl={secondaryCtaUrl} />
+        <Services data={data.services} />
+        <AIAngle data={data.aiAngle} />
+        <Testimonials items={data.testimonials} />
+        <Pricing data={data.pricing} />
+        <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
       </main>
-    </div>
+      <Footer settings={data.siteSettings} />
+    </>
   );
 }
