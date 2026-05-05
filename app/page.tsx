@@ -1,17 +1,19 @@
-import { Footer } from "@/components/Footer";
-import { AIAngle } from "@/components/sections/AIAngle";
-import { FinalCTA } from "@/components/sections/FinalCTA";
-import { Hero } from "@/components/sections/Hero";
-import { Pricing } from "@/components/sections/Pricing";
-import { Services } from "@/components/sections/Services";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { getHomePageData } from "@/lib/get-home-page";
+import {
+  FinalCTA,
+  Footer,
+  Header,
+  Hero,
+  Pricing,
+  Services,
+  Testimonials,
+} from "@/components/Sections";
+import { HOME_PAGE_DATA } from "@/lib/home-data";
 import type { Metadata } from "next";
 
-export const revalidate = 60;
+const data = HOME_PAGE_DATA;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { seo } = await getHomePageData();
+export function generateMetadata(): Metadata {
+  const { seo } = data;
   const title = seo.title?.trim() || "Ciao Ciao, European product studio";
   const description =
     seo.description?.trim() ||
@@ -29,23 +31,20 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Home() {
-  const data = await getHomePageData();
-  const secondaryCtaUrl =
-    process.env.NEXT_PUBLIC_PORTFOLIO_URL?.trim() ||
-    data.hero.secondaryCtaUrl;
-
+export default function Home() {
   return (
-    <>
-      <main>
-        <Hero data={data.hero} secondaryCtaUrl={secondaryCtaUrl} />
-        <Services data={data.services} />
-        <AIAngle data={data.aiAngle} />
-        <Testimonials items={data.testimonials} />
-        <Pricing data={data.pricing} />
-        <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
-      </main>
-      <Footer settings={data.siteSettings} />
-    </>
+    <div className="pageRoot">
+      <Header />
+      <div className="contentColumn">
+        <main>
+          <Hero data={data.hero} secondaryCtaUrl={data.hero.secondaryCtaUrl} />
+          <Services data={data.services} aiAngle={data.aiAngle} />
+          <Testimonials items={data.testimonials} />
+          <Pricing data={data.pricing} />
+          <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
+        </main>
+        <Footer settings={data.siteSettings} />
+      </div>
+    </div>
   );
 }

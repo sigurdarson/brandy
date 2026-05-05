@@ -1,0 +1,71 @@
+@use "../../../styles/mixins/radius" as *;
+
+.section {
+  padding: 0;
+}
+
+.testimonialsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.row {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  @include radius-card-inner;
+  background: var(--color-bg);
+  border-top: none;
+  border-bottom: none;
+}
+
+.quote {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.person {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+.companyPill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  @include radius-pill;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+  background: rgba(20, 20, 20, 0.06);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  @include radius-full;
+  object-fit: cover;
+}

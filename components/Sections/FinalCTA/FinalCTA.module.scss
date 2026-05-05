@@ -1,0 +1,46 @@
+@use "../../../styles/mixins/radius" as *;
+
+.section {
+  padding: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.body {
+  margin: 0;
+  padding: 24px;
+  @include radius-card-inner;
+  background: var(--color-bg);
+  border-top: none;
+  border-bottom: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  box-sizing: border-box;
+}
+
+.secondary {
+  margin: 0;
+  padding: 24px;
+  @include radius-card-inner;
+  background: var(--color-bg);
+  border-top: none;
+  border-bottom: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  box-sizing: border-box;
+}
+
+.emailLink {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+}

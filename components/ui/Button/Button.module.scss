@@ -1,0 +1,76 @@
+@use "../../../styles/mixins/radius" as *;
+
+.root {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.root:disabled,
+.root[data-disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.variantPrimary {
+  background: var(--color-button-fill);
+  color: var(--color-button-text);
+}
+
+.variantSecondary {
+  background: rgba(20, 20, 20, 0.06);
+  color: var(--color-text-primary);
+}
+
+.sizeDefault {
+  min-height: 36px;
+  padding: 0 12px;
+  @include radius-control;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.sizeSmall {
+  min-height: 28px;
+  padding: 0 8px;
+  @include radius-control;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.variantSecondary.sizeDefault {
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.variantSecondary.sizeSmall {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sizeDefault .icon :is(svg) {
+  width: 20px;
+  height: 20px;
+}
+
+.sizeSmall .icon :is(svg) {
+  width: 16px;
+  height: 16px;
+}

@@ -6,7 +6,7 @@ export type SeoData = {
 
 export type HeroData = {
   headline: string;
-  subhead: string;
+  subhead?: string;
   primaryCtaLabel: string;
   secondaryCtaLabel: string;
   secondaryCtaUrl: string;
@@ -48,7 +48,6 @@ export type PricingTier = {
   price: string;
   description: string;
   bestFor: string;
-  isHighlighted: boolean;
 };
 
 export type PricingData = {
@@ -65,17 +64,9 @@ export type FinalCtaData = {
   secondaryLine: string;
 };
 
-export type SocialLink = {
-  platform: string;
-  label: string;
-  url: string;
-};
-
 export type SiteSettings = {
   email: string;
-  tagline: string;
   location: string;
-  socialLinks: SocialLink[];
   footerSignoff: string;
 };
 
