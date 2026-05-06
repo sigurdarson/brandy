@@ -1,0 +1,7 @@
+/// Shared shadow presets.
+/// Update these two layers to tune the card shadow globally.
+@mixin shadow-card {
+  box-shadow:
+    0 0 2px rgba(20, 20, 20, 0.08),
+    0 8px 24px rgba(20, 20, 20, 0.04);
+}
