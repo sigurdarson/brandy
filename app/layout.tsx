@@ -1,3 +1,4 @@
+import { Header } from "@/components/Sections";
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.scss";
@@ -29,7 +30,10 @@ export default function RootLayout({
             strategy="lazyOnload"
           />
         ) : null}
-        {children}
+        <div className="pageRoot">
+          <Header />
+          {children}
+        </div>
       </body>
     </html>
   );

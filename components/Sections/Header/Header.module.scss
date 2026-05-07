@@ -54,9 +54,16 @@
 }
 
 .segment {
+  display: inline-flex;
+}
+
+.segmentTrack {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  list-style: none;
+  margin: 0;
   padding: 4px;
   @include radius-segment;
   overflow: hidden;
@@ -64,23 +71,49 @@
   backdrop-filter: blur(8px);
 }
 
-.segmentActive {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  padding: 0 12px;
+/* Sliding pill: follows hover/focus, else the current route (see below). */
+.segmentTrack::before {
+  content: "";
+  display: none;
+  pointer-events: none;
+  z-index: 0;
   @include radius-segment;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  color: var(--color-text-primary);
   background: var(--color-surface);
-  text-decoration: none;
 }
 
-.segmentInactive {
+@supports (anchor-name: --a) {
+  .segmentTrack::before {
+    display: block;
+    position: absolute;
+    position-anchor: --a;
+    left: anchor(left);
+    top: anchor(top);
+    width: anchor-size(width);
+    height: anchor-size(height);
+    transition:
+      left 0.22s ease,
+      top 0.22s ease,
+      width 0.22s ease,
+      height 0.22s ease;
+  }
+
+  .segmentTrack:not(:has(a:is(:hover, :focus-visible)))
+    .segmentItem:has(a[aria-current="page"]) {
+    anchor-name: --a;
+  }
+
+  .segmentItem:has(a:is(:hover, :focus-visible)) {
+    anchor-name: --a;
+  }
+}
+
+.segmentItem {
+  position: relative;
+  z-index: 1;
+  display: flex;
+}
+
+.segmentLink {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,3 +129,9 @@
   text-decoration: none;
 }
 
+/* Browsers without anchor positioning: show active segment like the old pill. */
+@supports not (anchor-name: --a) {
+  .segmentLink[aria-current="page"] {
+    background: var(--color-surface);
+  }
+}

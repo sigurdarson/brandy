@@ -1,5 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CiaoCiaoMark } from "./CiaoCiaoMark";
 import styles from "./Header.module.scss";
 
@@ -8,6 +11,10 @@ type Props = {
 };
 
 export function Header({ brandName = "CiaoCiao" }: Props) {
+  const pathname = usePathname();
+  const studioCurrent = pathname === "/" ? "page" : undefined;
+  const labsCurrent = pathname === "/labs" ? "page" : undefined;
+
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -16,16 +23,30 @@ export function Header({ brandName = "CiaoCiao" }: Props) {
           <span className={styles.brand}>{brandName}</span>
         </Link>
         <div className={styles.actions}>
-          <div className={styles.segment} role="group" aria-label="Focus">
-            <a className={styles.segmentActive} href="#">
-              Studio
-            </a>
-            <a className={styles.segmentInactive} href="#lab">
-              Lab
-            </a>
-          </div>
+          <nav className={styles.segment} aria-label="Site sections">
+            <ul className={styles.segmentTrack}>
+              <li className={styles.segmentItem}>
+                <Link
+                  className={styles.segmentLink}
+                  href="/"
+                  aria-current={studioCurrent}
+                >
+                  Studio
+                </Link>
+              </li>
+              <li className={styles.segmentItem}>
+                <Link
+                  className={styles.segmentLink}
+                  href="/labs"
+                  aria-current={labsCurrent}
+                >
+                  Lab
+                </Link>
+              </li>
+            </ul>
+          </nav>
           <Button
-            href="#contact"
+            href="/#contact"
             variant="primary"
             size="default"
             className="focusRing"

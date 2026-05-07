@@ -1,7 +1,6 @@
 import {
   FinalCTA,
   Footer,
-  Header,
   Hero,
   Pricing,
   Services,
@@ -33,18 +32,15 @@ export function generateMetadata(): Metadata {
 
 export default function Home() {
   return (
-    <div className="pageRoot">
-      <Header />
-      <div className="contentColumn">
-        <main>
-          <Hero data={data.hero} secondaryCtaUrl={data.hero.secondaryCtaUrl} />
-          <Services data={data.services} aiAngle={data.aiAngle} />
-          <Testimonials items={data.testimonials} />
-          <Pricing data={data.pricing} />
-          <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
-        </main>
-        <Footer settings={data.siteSettings} />
-      </div>
+    <div className="contentColumn">
+      <main>
+        <Hero data={data.hero} secondaryCtaUrl={data.hero.secondaryCtaUrl} />
+        <Services data={data.services} aiAngle={data.aiAngle} />
+        <Testimonials items={data.testimonials} />
+        <Pricing data={data.pricing} />
+        <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
+      </main>
+      <Footer settings={data.siteSettings} />
     </div>
   );
 }
