@@ -88,6 +88,15 @@ h6 {
   font-weight: 500;
 }
 
+/* Marketing column: balanced headings, prettier body copy (skill: make-interfaces-feel-better) */
+.contentColumn :where(h1, h2, h3, h4, h5, h6) {
+  text-wrap: balance;
+}
+
+.contentColumn :where(p, li, blockquote, figcaption) {
+  text-wrap: pretty;
+}
+
 a {
   color: inherit;
 }

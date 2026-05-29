@@ -14,6 +14,13 @@
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
+  transition-property: transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.root:active:not(:disabled):not([data-disabled]) {
+  transform: scale(0.96);
 }
 
 .root:disabled,
@@ -46,6 +53,17 @@
   @include radius-control;
   font-size: 14px;
   line-height: 18px;
+}
+
+/* Optical: slightly less padding on icon side (skill: make-interfaces-feel-better / surfaces) */
+.root:has(.icon).sizeDefault {
+  padding-left: 12px;
+  padding-right: 10px;
+}
+
+.root:has(.icon).sizeSmall {
+  padding-left: 8px;
+  padding-right: 6px;
 }
 
 .variantSecondary.sizeDefault {
