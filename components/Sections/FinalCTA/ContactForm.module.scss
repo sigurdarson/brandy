@@ -1,0 +1,57 @@
+@use "../../../styles/mixins/radius" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 24px;
+  @include radius-card-inner;
+  background: var(--color-bg);
+  border-top: none;
+  border-bottom: none;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.field {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.fieldFull {
+  display: contents;
+}
+
+.input,
+.textarea {
+  display: block;
+  width: 100%;
+  border: none;
+  @include radius-control;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+  background: rgba(20, 20, 20, 0.06);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.form > :is(button, a) {
+  align-self: flex-start;
+  margin: 0;
+}

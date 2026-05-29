@@ -1,0 +1,64 @@
+@use "../../../styles/mixins/radius" as *;
+@use "../../../styles/mixins/shadow" as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  @include radius-card;
+  @include shadow-card;
+  background: var(--color-surface);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 12px;
+}
+
+.title {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+.titlePlaceholder {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  @include radius-pill;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  flex-shrink: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+}

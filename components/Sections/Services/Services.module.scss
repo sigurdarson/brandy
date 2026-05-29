@@ -1,0 +1,87 @@
+@use "../../../styles/mixins/radius" as *;
+
+.section {
+  padding: 0;
+}
+
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.serviceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  @include radius-card-inner;
+  background: var(--color-bg);
+  border-top: none;
+  border-bottom: none;
+}
+
+.pillRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.pillSolid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  @include radius-pill;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  background: var(--color-accent);
+}
+
+.pillSoft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+  background: rgba(20, 20, 20, 0.06);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.aiNote {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 8px;
+  padding: 24px;
+  @include radius-card-inner;
+  background: var(--color-accent-soft);
+  box-sizing: border-box;
+}
+
+.aiNoteText {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-accent);
+}

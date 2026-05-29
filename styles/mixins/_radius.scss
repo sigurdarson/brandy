@@ -1,0 +1,48 @@
+/// Design-system radii. Safari / Firefox: token values only.
+/// Browsers that support `corner-shape: squircle` (e.g. Chrome): +4px on the radius + squircle.
+/// Values come from `:root` in `app/globals.scss`.
+
+@mixin radius-card {
+  border-radius: var(--radius-card);
+  @supports (corner-shape: squircle) {
+    border-radius: calc(var(--radius-card) + 8px);
+    corner-shape: squircle;
+  }
+}
+
+@mixin radius-card-inner {
+  border-radius: var(--radius-card-inner);
+  @supports (corner-shape: squircle) {
+    border-radius: calc(var(--radius-card-inner) + 8px);
+    corner-shape: squircle;
+  }
+}
+
+@mixin radius-control {
+  border-radius: var(--radius-control);
+  @supports (corner-shape: squircle) {
+    border-radius: calc(var(--radius-control) + 8px);
+    corner-shape: squircle;
+  }
+}
+
+@mixin radius-pill {
+  border-radius: var(--radius-pill);
+  @supports (corner-shape: squircle) {
+    border-radius: calc(var(--radius-pill) + 8px);
+    corner-shape: squircle;
+  }
+}
+
+@mixin radius-segment {
+  border-radius: var(--radius-segment);
+  @supports (corner-shape: squircle) {
+    border-radius: calc(var(--radius-segment) + 8px);
+    corner-shape: squircle;
+  }
+}
+
+/// Fully rounded (circle / capsule); not a squircle token.
+@mixin radius-full {
+  border-radius: 9999px;
+}

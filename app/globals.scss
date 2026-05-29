@@ -1,0 +1,135 @@
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMontreal-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMontreal-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* Paper “Updated design” tokens */
+  --color-bg: #f6f6f6;
+  --color-surface: #ffffff;
+  --color-accent: #00746f;
+  --color-accent-soft: rgba(0, 116, 111, 0.08);
+  --color-text-primary: #141414;
+  --color-text-muted: rgba(20, 20, 20, 0.64);
+  --color-text-faint: rgba(20, 20, 20, 0.4);
+  --color-border: rgba(20, 20, 20, 0.12);
+  --color-button-fill: #141414;
+  --color-button-text: #ffffff;
+  --color-header-bg: rgba(246, 246, 246, 0.72);
+  --radius-card: 24px;
+  --radius-card-inner: 16px;
+  --radius-control: 12px;
+  --radius-pill: 8px;
+  --radius-segment: 10px;
+  --space-section: 48px;
+  --space-header-to-main: 64px;
+  --font-headings: "Neue Montreal", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Neue Montreal", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f0f0f;
+    --color-surface: #1a1a1a;
+    --color-accent: #3dd4c9;
+    --color-accent-soft: rgba(61, 212, 201, 0.12);
+    --color-text-primary: #f4f4f4;
+    --color-text-muted: rgba(244, 244, 244, 0.64);
+    --color-text-faint: rgba(244, 244, 244, 0.4);
+    --color-border: rgba(244, 244, 244, 0.14);
+    --color-button-fill: #f4f4f4;
+    --color-button-text: #141414;
+  }
+}
+*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-headings);
+  font-weight: 500;
+}
+
+/* Marketing column: balanced headings, prettier body copy (skill: make-interfaces-feel-better) */
+.contentColumn :where(h1, h2, h3, h4, h5, h6) {
+  text-wrap: balance;
+}
+
+.contentColumn :where(p, li, blockquote, figcaption) {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+.pageRoot {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.contentColumn {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+}
+
+.contentColumn > main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  margin-top: var(--space-header-to-main);
+}
+
+.pageShell {
+  width: 100%;
+}
+
+.focusRing:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
