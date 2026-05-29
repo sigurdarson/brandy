@@ -1,25 +1,180 @@
-.section {
-  padding: 0;
+@use "../../../styles/mixins/radius" as *;
+@use "../../../styles/mixins/shadow" as *;
+
+/* Full-bleed band so the hero can break out of the 768px content column
+   and line up with the header's content width. Horizontal padding mirrors
+   the header (32px) so the edges sit flush with the nav above it. */
+.band {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px 32px 0;
+    box-sizing: border-box;
 }
 
 .inner {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.card {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: clamp(480px, 76vh, 640px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    @include radius-card;
+    @include shadow-card;
+    background: var(--color-surface);
+    /* Promote the card to its own layer so the rounded/squircle overflow clip
+       is honoured for the composited blobs (blur + blend escape a plain
+       overflow:hidden otherwise, bleeding teal into the corners). */
+    transform: translateZ(0);
+}
+
+/* Liquid flow: a few oversized, heavily blurred teal blobs that slowly
+   drift, scale, and rotate to suggest flowing silk/aurora. */
+/* Off-screen holder for the SVG turbulence filter definition. */
+.defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.flow {
+    position: absolute;
+    inset: -30%;
+    z-index: 0;
+    /* Blur softens the blobs, then the turbulence displacement ripples them
+       into organic, flowing silk that blends together. */
+    filter: blur(26px) saturate(135%) url(#hero-turbulence);
+    /* Halftone grid driven by the flow itself: the dot pattern only carves the
+       shape, while each dot's strength comes from the green's own opacity at
+       that point — bright where the flow is dense, invisible where it fades. */
+    -webkit-mask-image: radial-gradient(circle, #000 1px, transparent 1.6px);
+    mask-image: radial-gradient(circle, #000 1px, transparent 1.6px);
+    -webkit-mask-size: 5px 5px;
+    mask-size: 5px 5px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+}
+
+.blob {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    /* Multiply lets the teal read against the white card; screen would vanish. */
+    mix-blend-mode: multiply;
+    will-change: transform;
+}
+
+.blobA {
+    top: -14%;
+    left: -12%;
+    width: 62%;
+    height: 68%;
+    background: radial-gradient(circle at 40% 40%, rgba(61, 212, 201, 0.92) 0%, rgba(0, 116, 111, 0.52) 32%, rgba(0, 116, 111, 0) 64%);
+    animation: driftA 26s ease-in-out infinite alternate;
+}
+
+.blobB {
+    top: 2%;
+    right: -14%;
+    width: 54%;
+    height: 88%;
+    background: radial-gradient(circle at 64% 50%, rgba(0, 168, 159, 0.88) 0%, rgba(0, 116, 111, 0.48) 32%, rgba(0, 116, 111, 0) 64%);
+    animation: driftB 32s ease-in-out infinite alternate;
+}
+
+.blobC {
+    bottom: -18%;
+    left: 2%;
+    width: 74%;
+    height: 60%;
+    background: radial-gradient(circle at 42% 66%, rgba(120, 230, 210, 0.82) 0%, rgba(0, 116, 111, 0.44) 30%, rgba(0, 116, 111, 0) 62%);
+    animation: driftC 38s ease-in-out infinite alternate;
+}
+
+@keyframes driftA {
+    0% {
+        transform: translate3d(-6%, -4%, 0) scale(1) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(12%, 10%, 0) scale(1.18) rotate(22deg);
+    }
+}
+
+@keyframes driftB {
+    0% {
+        transform: translate3d(8%, 6%, 0) scale(1.1) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(-12%, -8%, 0) scale(0.92) rotate(-26deg);
+    }
+}
+
+@keyframes driftC {
+    0% {
+        transform: translate3d(0%, 8%, 0) scale(0.95) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(-10%, -12%, 0) scale(1.22) rotate(18deg);
+    }
+}
+
+/* Soft light scrim that keeps the centre calm so the dark type stays crisp. */
+.scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(92% 78% at 50% 52%, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.14) 50%, rgba(255, 255, 255, 0) 80%);
+}
+
+.content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 760px;
+    padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 64px);
+    box-sizing: border-box;
 }
 
 .headline {
-  font-family: var(--font-body);
-  font-size: 32px;
-  line-height: 1.3;
-  font-weight: 500;
-  color: var(--color-text-primary);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    text-wrap: balance;
 }
 
 .actions {
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .blob {
+        animation: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .band {
+        padding: 8px 16px 0;
+    }
 }
