@@ -35,29 +35,70 @@ type Props = {
 
 export function Hero({ data, secondaryCtaUrl }: Props) {
   return (
-    <section className={styles.section} aria-labelledby="hero-heading">
-      <div className={`pageShell ${styles.inner}`}>
-        <h1 id="hero-heading" className={styles.headline}>
-          {data.headline}
-        </h1>
-        <div className={styles.actions}>
-          <Button
-            href="#contact"
-            variant="primary"
-            size="default"
-            className="focusRing"
-          >
-            {data.primaryCtaLabel}
-          </Button>
-          <Button
-            href={secondaryCtaUrl}
-            variant="secondary"
-            size="default"
-            className="focusRing"
-            icon={<HeroTelegramIcon />}
-          >
-            {data.secondaryCtaLabel}
-          </Button>
+    <section className={styles.band} aria-labelledby="hero-heading">
+      <div className={styles.inner}>
+        <div className={styles.card}>
+          {/* Turbulence displacement field warps the blobs into organic,
+              flowing silk. Defined once, referenced by the flow's CSS filter. */}
+          <svg className={styles.defs} aria-hidden xmlns="http://www.w3.org/2000/svg">
+            <filter id="hero-turbulence" x="-30%" y="-30%" width="160%" height="160%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.006 0.013"
+                numOctaves={3}
+                seed={11}
+                result="noise"
+              >
+                <animate
+                  attributeName="baseFrequency"
+                  dur="36s"
+                  values="0.006 0.013; 0.011 0.008; 0.006 0.013"
+                  calcMode="spline"
+                  keyTimes="0; 0.5; 1"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+                  repeatCount="indefinite"
+                />
+              </feTurbulence>
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="150"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </svg>
+          {/* Animated flowing gradient, painted in the studio's teal palette. */}
+          <div className={styles.flow} aria-hidden>
+            <span className={`${styles.blob} ${styles.blobA}`} />
+            <span className={`${styles.blob} ${styles.blobB}`} />
+            <span className={`${styles.blob} ${styles.blobC}`} />
+          </div>
+          <div className={styles.scrim} aria-hidden />
+          <div className={styles.content}>
+            <h1 id="hero-heading" className={styles.headline}>
+              {data.headline}
+            </h1>
+            <div className={styles.actions}>
+              <Button
+                href="#contact"
+                variant="primary"
+                size="default"
+                className="focusRing"
+              >
+                {data.primaryCtaLabel}
+              </Button>
+              <Button
+                href={secondaryCtaUrl}
+                variant="secondary"
+                size="default"
+                className="focusRing"
+                icon={<HeroTelegramIcon />}
+              >
+                {data.secondaryCtaLabel}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

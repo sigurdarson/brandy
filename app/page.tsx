@@ -32,15 +32,17 @@ export function generateMetadata(): Metadata {
 
 export default function Home() {
   return (
-    <div className="contentColumn">
-      <main>
-        <Hero data={data.hero} secondaryCtaUrl={data.hero.secondaryCtaUrl} />
-        <Services data={data.services} aiAngle={data.aiAngle} />
-        <Testimonials items={data.testimonials} />
-        <Pricing data={data.pricing} />
-        <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
-      </main>
-      <Footer settings={data.siteSettings} />
-    </div>
+    <>
+      <Hero data={data.hero} secondaryCtaUrl={data.hero.secondaryCtaUrl} />
+      <div className="contentColumn">
+        <main>
+          <Services data={data.services} aiAngle={data.aiAngle} />
+          <Testimonials items={data.testimonials} />
+          <Pricing data={data.pricing} />
+          <FinalCTA data={data.finalCta} email={data.siteSettings.email} />
+        </main>
+        <Footer settings={data.siteSettings} />
+      </div>
+    </>
   );
 }
